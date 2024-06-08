@@ -1,2 +1,2 @@
-# ure_white_city
+# Pure White City
 纯白城市
