@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>纯白城市-255</title>
+        <link rel="stylesheet" href="./css/index.css">
+        <style>
+            *{
+                margin: 0;
+                padding: 0;
+                box-sizing: border-box;
+            }
+            /* 定义字体 */
+            /* 明日方舟 */
+            @font-face {
+                font-family: 'arknights';
+                src: url('./fonts/FangZhou.otf');
+                /* font-weight: normal; */
+                /* font-style: normal; */
+            }
+            /* Orbits-Thin */
+            @font-face {
+                font-family: 'orbits';
+                src: url('./fonts/Orbits-Thin.ttf') format('truetype');
+                /* font-weight: normal; */
+                /* font-style: normal; */
+            }
+            /* HarmonyOS_Sans_SC */
+            @font-face {
+                font-family: 'harmonyOS';
+                src: url('./fonts/HarmonyOS_Sans_SC_Black.ttf') format('truetype');
+                font-weight: 600;
+                /* font-style: normal; */
+            }
+            @font-face {
+                font-family: 'harmonyOS';
+                src: url('./fonts/HarmonyOS_Sans_SC_Bold.ttf') format('truetype');
+                font-weight: 500;
+            }
+            @font-face {
+                font-family: 'harmonyOS';
+                src: url('./fonts/HarmonyOS_Sans_SC_Medium.ttf') format('truetype');
+                font-weight: 400;
+            }
+            @font-face {
+                font-family: 'harmonyOS';
+                src: url('./fonts/HarmonyOS_Sans_SC_Regular.ttf') format('truetype');
+                font-weight: 300;
+            }
+            @font-face {
+                font-family: 'harmonyOS';
+                src: url('./fonts/HarmonyOS_Sans_SC_Light.ttf') format('truetype');
+                font-weight: 200;
+            }
+            @font-face {
+                font-family: 'harmonyOS';
+                src: url('./fonts/HarmonyOS_Sans_SC_Thin.ttf') format('truetype');
+                font-weight: 100;
+            }
+            /* Bender */
+            @font-face {
+                font-family: 'bender';
+                src: url('./fonts/BenderLight.ttf') format('truetype');
+                /* font-weight: normal; */
+                /* font-style: normal; */
+            }
+            body{
+                width: 100vw;
+                height: 100vh;
+                position: relative;
+                overflow: auto;
+                background-color: #CCCCCC;
+            }
+            /* 隐藏所有滚动条 */
+            body::-webkit-scrollbar {
+                display: none;
+            }
+            /* 针对Chrome浏览器 */
+            body {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+
+            /* ------------ */
+
+            .body{
+                width: 100vw;
+                height: 300vh;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                flex-flow: column nowrap;
+            }
+            .header{
+                width: 100vw;
+                height: 8vh;
+                min-height: 66px;
+                max-height: 132px;
+                position: fixed;
+                top: 0;
+                left: 0;
+                color: #FFFFFF;
+                /* background-color: #FFFFFF; */
+                /* box-shadow: 0px 0px 20px 2px rgba(0,0,0,0.2); */
+                background-color: transparent;
+                box-shadow: 0px 0px 20px 2px rgba(0,0,0,0);
+                transition: background-color 0.4s ease-in-out,box-shadow 0.6s ease-in-out,color 0.4s ease-in-out,height 0.4s ease-out;
+
+                z-index: 1000;
+            }
+            .header:hover{
+                height: 22vh;
+                color: #000000;
+                background-color: #FFFFFF;
+                box-shadow: 0px 0px 20px 2px rgba(0,0,0,0.2);
+            }
+            .header_show{
+                color: #000000;
+                background-color: #FFFFFF;
+                box-shadow: 0px 0px 20px 2px rgba(0,0,0,0.2);
+            }
+
+            /* ------------ */
+
+            .main{
+                width: 100vw;
+                height: 100vh;
+                background-color: #FFFFFF;
+            }
+            .main_in{
+                width: 100vw;
+                height: 100vh;
+                position: relative;
+            }
+            .main_in_title_box{
+                width: 50vw;
+                height: 50vh;
+                /* position: absolute; */
+                position: fixed;
+                left: 25vw;
+                top: 25vh;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-flow: row wrap;
+                user-select: none;
+                
+                z-index: 4;
+            }
+            .main_title1_box{
+                width: 100%;
+                height: 50%;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                flex-flow: row nowrap;
+            }
+            .main_title1{
+                width: auto;
+                height: auto;
+                color: #FFFFFF;
+                /* font-size: 70px; */
+                font-size: 7vw;
+                /* font-family: 'arknights'; */
+                font-family: 'harmonyOS';
+                font-weight: bolder;
+                display: inline-block;
+            }
+            .main_title1>span{
+                font-family: 'bender';
+            }
+            .title_cursor{
+                width: 14px;
+                height: 6.5vw;
+                background-color: #FFFFFF;
+            }
+            .title_cursor_hide{
+                background-color: transparent;
+            }
+            .main_title2{
+                width: auto;
+                height: auto;
+                color: #FFFFFF;
+                /* font-size: 60px; */
+                font-size: 6vw;
+                font-weight: lighter;
+                /* font-family: 'arknights'; */
+                font-family: 'orbits';
+                transform: translateY(50px);
+                transition: opacity 1s ease-in-out,transform 1s ease-out;
+                opacity: 0;
+            }
+            .main_title2_show{
+                opacity: 1;
+                transform: translateY(0px);
+            }
+            .main_timer{
+                width: 80%;
+                height: 20%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-flow: row nowrap;
+                transform: scale(0.8);
+                opacity: 0;
+                transition: opacity 0.6s ease-in-out,transform 0.6s ease-in-out;
+            }
+            .main_timer_show{
+                transform: scale(1);
+                opacity: 1;
+            }
+            .main_timer:hover{
+                transform: scale(1.1);
+            }
+            .timer_date,.timer_time{
+                display: flex;
+                flex-flow: row nowrap;
+                justify-content: center;
+                align-items: center;
+                font-size: 1.6vw;
+                font-weight: bolder;
+                color: #FFFFFF;
+                /* font-family: 'arknights'; */
+                font-family: 'bender';
+            }
+            .timer_date>span,.main_timer_w{
+                font-family: 'arknights';
+            }
+            .main_in_img_box{
+                width: 100vw;
+                height: 100vh;
+                overflow: hidden;
+                position: fixed;
+                z-index: 1;
+            }
+            .main_in_img{
+                width: 100vw;
+                margin-top: calc(540px - 100vh);
+                background-color: #FFFFFF;
+                transition: opacity 1s ease-in-out;
+            }
+            .main_in_img_hide{
+                opacity: 0;
+            }
+
+            /* 占位 */
+            .main_in_space{
+                width: 100vw;
+                height: 100vh;
+                background-color: transparent;
+                z-index: 0;
+            }
+
+            /* ------------ */
+
+            .main_in_center{
+                width: 100vw;
+                height: 100vh;
+                background-color: #FFFFFF;
+                box-shadow: 12px 0px 12px 0px rgba(0,0,0,0.2);
+                position: absolute;
+                top: 100vh;
+                left: 0vw;
+                z-index: 5;
+            }
+            .center_in{
+                width: 100%;
+                height: 100%;
+            }
+            .center_in_content_box{
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-flow: row nowrap;
+            }
+
+            .center_contents{
+                width: 22.5%;
+                height: 95%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-flow: column nowrap;
+                transition: width 1s ease-in-out,opacity 0.8s ease-in-out;
+                overflow: hidden;
+            }
+            .center_in_content_box .center_contents_open{
+                width: 67.5%;
+            }
+            .center_in_content_box .center_contents_hide{
+                width: 0%;
+                opacity: 0;
+            }
+            .city_content{
+                width: 22.5%;
+            }
+            .area_content{
+                width: 22.5%;
+            }
+            .address_content{
+                width: 22.5%;
+            }
+            .person_content{
+                width: 22.5%;
+            }
+            .center_content_title{
+                width: 10vw;
+                height: auto;
+                color: #000000;
+                font-size: 2.4vw;
+                font-family: 'harmonyOS';
+                font-weight: 500;
+                user-select: none;
+            }
+            .center_content_text{
+                /* height: 50%; */
+                height: 0;
+                color: #000000;
+                font-size: 1.4vw;
+                font-family: 'harmonyOS';
+                font-weight: 100;
+                transition: height 1s ease-in-out,opacity 0.8s ease-in-out;
+                overflow: hidden;
+                opacity: 0;
+                overflow: hidden;
+            }
+            .center_content_text_show{
+                height: 50%;
+                opacity: 1;
+            }
+            .city_content_svg{
+                background-color: #9AC1F0;
+                box-shadow: 0px 0px 12px 0px rgba(154,193,240,0.6);
+            }
+            .area_content_svg{
+                background-color: #73F896;
+                box-shadow: 0px 0px 12px 0px rgba(115,248,150,0.6);
+            }
+            .address_content_svg{
+                background-color: #9EE64B;
+                box-shadow: 0px 0px 12px 0px rgba(158,230,75,0.6);
+            }
+            .person_content_svg{
+                background-color: #F5C144;
+                box-shadow: 0px 0px 12px 0px rgba(245,193,68,0.6);
+            }
+            .svg_boxs{
+                width: 8vw;
+                height: 8vw;
+                min-width: 50px;
+                min-height: 50px;
+                max-width: 120px;
+                max-height: 120px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-flow: column nowrap;
+                /* background-color: #9AC1F0; */
+                border-radius: 50%;
+                transition: transform 0.4s ease-in-out;
+                cursor: pointer;
+                user-select: none;
+            }
+            .svg_boxs:hover{
+                transform: scale(1.1);
+            }
+            .svg_boxs>svg {
+                width: 4vw;
+                height: 4vw;
+                fill: #FFFFFF;
+            }
+            .center_content_cancel_btn{
+                width: 34px;
+                height: 34px;
+                /* width: 0px; */
+                /* height: 0px; */
+                transform: scale(0);
+                font-size: 16px;
+                font-family: 'harmonyOS';
+                font-weight: 600;
+                background-color: #ececec;
+                box-shadow: 0px 0px 8px 0px rgba(0,0,0,0.2);
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-flow: column nowrap;
+                user-select: none;
+                cursor: pointer;
+                opacity: 0;
+                transition: all 0.8s ease-in-out;
+            }
+            .center_content_cancel_btn_show{
+                /* width: 34px; */
+                /* height: 34px; */
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            /* ------------ */
+
+            .main_in_bottom{
+                width: 100vw;
+                height: 100vh;
+                background-color: #FFFFFF;
+
+                position: absolute;
+                top: 200vh;
+                left: 0vw;
+                z-index: 6;
+            }
+
+
+            /* ------------ */
+
+            .footer{
+                background-color: #4B4B4B;
+                width: 100vw;
+                height: 45vh;
+                position: absolute;
+                top: 300vh;
+                left: 0vw;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-flow: row nowrap;
+                z-index: 6;
+            }
+            .footer_in{
+                width: 90%;
+                height: 90%;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                flex-flow: column nowrap;
+            }
+            .footer_title{
+                width: 100%;
+                height: 25%;
+                color: #CCCCCC;
+                font-size: 24px;
+                font-family: 'harmonyOS';
+                font-weight: 500;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-flow: row wrap;
+                user-select: none;
+            }
+            .footer_content{
+                width: 100%;
+                height: 75%;
+                color: #CCCCCC;
+                font-size: 14px;
+                font-family: 'harmonyOS';
+                font-weight: 200;
+                display: flex;
+                justify-content: flex-start;
+                align-items: center;
+                flex-flow: column nowrap;
+                user-select: none;
+            }
+
+        </style>
+    </head>
+    <body>
+        <div class="body">
+            <header class="header">
+                <div class="index_box">
+                    <nav class="index"></nav>
+                </div>
+            </header>
+            <main class="main">
+                <div class="main_in">
+                    <div class="main_in_title_box">
+                        <div class="main_title1_box">
+                            <!-- <div class="main_title1">纯白城市&nbsp;<span>#255</span>&nbsp;</div> -->
+                            <div class="main_title1"></div>
+                            <div class="title_cursor title_cursor_hide"></div>
+                        </div>
+                        <div class="main_title2">Pure White City</div>
+                        <div class="main_timer">
+                            <div class="timer_date">
+                                <div class="main_timer_y"></div><span>&nbsp;年&nbsp;</span>
+                                <div class="main_timer_m"></div><span>&nbsp;月&nbsp;</span>
+                                <div class="main_timer_d"></div><span>&nbsp;日&nbsp;</span>
+                                <span>&nbsp;星期</span><div class="main_timer_w"></div>
+                            </div>
+                            &nbsp;&nbsp;
+                            <div class="timer_time"></div>
+                        </div>
+                    </div>
+                    <div class="main_in_img_box">
+                        <img class="main_in_img main_in_img_hide" src="./image/a4.png" alt="no picture">
+                    </div>
+                    <!-- 占位 -->
+                    <div class="main_in_space"></div>
+                    <div class="main_in_center">
+                        <div class="center_in">
+                            <div class="center_in_content_box">
+                                <div class="center_contents city_content">
+                                    <div class="svg_boxs city_content_svg">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-buildings" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M14.763.075A.5.5 0 0 1 15 .5v15a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5V14h-1v1.5a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5V10a.5.5 0 0 1 .342-.474L6 7.64V4.5a.5.5 0 0 1 .276-.447l8-4a.5.5 0 0 1 .487.022ZM6 8.694 1 10.36V15h5V8.694ZM7 15h2v-1.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 .5.5V15h2V1.309l-7 3.5V15Z"/>
+                                            <path d="M2 11h1v1H2v-1Zm2 0h1v1H4v-1Zm-2 2h1v1H2v-1Zm2 0h1v1H4v-1Zm4-4h1v1H8V9Zm2 0h1v1h-1V9Zm-2 2h1v1H8v-1Zm2 0h1v1h-1v-1Zm2-2h1v1h-1V9Zm0 2h1v1h-1v-1ZM8 7h1v1H8V7Zm2 0h1v1h-1V7Zm2 0h1v1h-1V7ZM8 5h1v1H8V5Zm2 0h1v1h-1V5Zm2 0h1v1h-1V5Zm0-2h1v1h-1V3Z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="center_content_title">城市概述</div>
+                                    <div class="center_content_text">
+                                        <span style="font-size: 1.8vw;font-weight: 300;">纯白城市群</span>是人类为了抵抗海平面上升导致的一系列灾难性自然灾害而建造的一共256座城市，它是人类科学技术的巅峰产物，是人类现存的最伟大的建筑之一，代表了人类群体意志的抗争与延续文明的决心。大灾变之后人类依靠它重新发展，并且重建文明。
+                                        <p></p>
+                                        <span style="font-size: 1.8vw;font-weight: 300;">纯白城市#255</span>是第255号纯白城市，它建造初期就被设计为可以漂浮的、在未来的天灾中永不沉没的移动城市。
+                                    </div>
+                                    <div class="center_content_cancel_btn">X</div>
+                                </div>
+                                
+                                <div class="center_contents area_content">
+                                    <div class="svg_boxs area_content_svg">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-dropbox" viewBox="0 0 16 16">
+                                            <path d="M8.01 4.555 4.005 7.11 8.01 9.665 4.005 12.22 0 9.651l4.005-2.555L0 4.555 4.005 2 8.01 4.555Zm-4.026 8.487 4.006-2.555 4.005 2.555-4.005 2.555-4.006-2.555Zm4.026-3.39 4.005-2.556L8.01 4.555 11.995 2 16 4.555 11.995 7.11 16 9.665l-4.005 2.555L8.01 9.651Z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="center_content_title">占地面积</div>
+                                    <div class="center_content_text">
+                                        <span style="font-size: 1.8vw;font-weight: 300;">纯白城市#255</span>
+                                        建造完成时占地面积约5000平方千米，在灾后一年内又扩建了400平方千米，是纯白城市群中占地面积最大的城市之一。
+                                    </div>
+                                    <div class="center_content_cancel_btn">X</div>
+                                </div>
+                                
+                                <div class="center_contents address_content">
+                                    <div class="svg_boxs address_content_svg">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pin-map" viewBox="0 0 16 16">
+                                            <path fill-rule="evenodd" d="M3.1 11.2a.5.5 0 0 1 .4-.2H6a.5.5 0 0 1 0 1H3.75L1.5 15h13l-2.25-3H10a.5.5 0 0 1 0-1h2.5a.5.5 0 0 1 .4.2l3 4a.5.5 0 0 1-.4.8H.5a.5.5 0 0 1-.4-.8l3-4z"/>
+                                            <path fill-rule="evenodd" d="M8 1a3 3 0 1 0 0 6 3 3 0 0 0 0-6zM4 4a4 4 0 1 1 4.5 3.969V13.5a.5.5 0 0 1-1 0V7.97A4 4 0 0 1 4 3.999z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="center_content_title">当前位置</div>
+                                    <div class="center_content_text">
+                                        <span style="font-size: 1.8vw;font-weight: 300;">纯白城市#255</span>
+                                        是建造于海上的移动城市，可以在海上“流浪”，目前正位于南极洲附近。
+                                        <p></p>
+                                        <p></p>
+                                        具体坐标：-159.94 , -78.56
+                                    </div>
+                                    <div class="center_content_cancel_btn">X</div>
+                                </div>
+                                
+                                <div class="center_contents person_content">
+                                    <div class="svg_boxs person_content_svg">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-bar-chart-line" viewBox="0 0 16 16">
+                                            <path d="M11 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12h.5a.5.5 0 0 1 0 1H.5a.5.5 0 0 1 0-1H1v-3a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3h1V7a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v7h1V2zm1 12h2V2h-2v12zm-3 0V7H7v7h2zm-5 0v-3H2v3h2z"/>
+                                        </svg>
+                                    </div>
+                                    <div class="center_content_title">城市人口</div>
+                                    <div class="center_content_text">
+                                        <span style="font-size: 1.8vw;font-weight: 300;">纯白城市#255</span>
+                                        设计初期预计最大可居住人口数为20,000,000。
+                                        <p></p>
+                                        目前常住人口约为<span style="text-decoration: line-through;font-family: 'bender';">&nbsp;0，已废弃&nbsp;</span>18970895。
+                                    </div>
+                                    <div class="center_content_cancel_btn">X</div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="main_in_bottom">
+                        <div></div>
+                    </div>
+                </div>
+            </main>
+            <footer class="footer">
+                <div class="footer_in">
+                    <div class="footer_title">纯白计划</div>
+                    <div class="footer_content">
+                        <p>Pure White Cities Project</p>
+                        <p>-</p>
+                        <p> ——纯白城市群,我们一直在—— </p>
+                        <p>-</p>
+                        <p>Copyright © <span class="copyright_year"></span> 纯白城市群 All rights reserved.</p>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <!-- 音效 -->
+        <audio class="music" src="./audio/The_Girl.mp3"></audio>
+        <audio class="audio_01" src="./audio/back_wheel_coasting.mp3"></audio>
+        <audio class="audio_02" src="./audio/steampunk-mechanical-gadget-188052.mp3"></audio>
+    </body>
+    <script src="./js/index.js"></script>
+    <script>
+
+        // 光标闪烁效果
+        let title_cursor = document.querySelector('.title_cursor');
+        // let title_cursor_flag = true;
+        let title_cursor_timer = setInterval(function(){
+            title_cursor.className = 'title_cursor';
+            setTimeout(function(){
+                title_cursor.className = 'title_cursor title_cursor_hide';
+            },550);
+        },1200);
+        
+        // 播放音乐
+        setTimeout(function(){
+            document.querySelector('.music').play();
+        },1000);
+        
+        window.onload = function(){
+            // 显示背景图片
+            document.querySelector('.main_in_img_hide').className = 'main_in_img';
+            // 打字效果
+            let main_title1 = document.querySelector('.main_title1');
+            // let main_title1_span = document.querySelector('.main_title1>span');
+            // main_title1.innerHTML = '';
+            setTimeout(function(){
+                main_title1.innerHTML += '纯';
+                setTimeout(function(){
+                    main_title1.innerHTML += '白';
+                    setTimeout(function(){
+                        main_title1.innerHTML += '城';
+                        setTimeout(function(){
+                            main_title1.innerHTML += '市&nbsp<span></span>';
+                            setTimeout(function(){
+                                // main_title1_span.innerHTML += '#';
+                                document.querySelector('.main_title1>span').innerHTML += '#';
+                                setTimeout(function(){
+                                    // main_title1_span.innerHTML += '2';
+                                    document.querySelector('.main_title1>span').innerHTML += '2';
+                                    setTimeout(function(){
+                                        // main_title1_span.innerHTML += '5';
+                                        document.querySelector('.main_title1>span').innerHTML += '5';
+                                        setTimeout(function(){
+                                            // main_title1_span.innerHTML += '5';
+                                            document.querySelector('.main_title1>span').innerHTML += '5';
+                                            setTimeout(function(){
+                                                main_title1.innerHTML += '&nbsp';
+                                                title2_show();
+                                                setTimeout(function(){
+                                                    document.querySelector('.main_timer').className = 'main_timer main_timer_show';
+                                                },400);
+                                            },100);
+                                        },100);
+                                    },100);
+                                },100);
+                            },300);
+                        },200);
+                    },400);
+                },200);
+            },2000);
+        }
+        // 副标题渐入效果
+        function title2_show(){
+            document.querySelector('.main_title2').className = 'main_title2 main_title2_show';
+            // document.querySelector('.main_title2').style.opacity = 1;
+            // document.querySelector('.main_title2').style.transform = 'translateY(0)';
+        }
+
+        // 监听滚动事件调整导航栏
+        window.addEventListener('scroll',function(e){
+            if(parseInt(window.scrollY) >= window.innerHeight - parseInt(window.innerHeight/2)){
+                document.querySelector('header').className = 'header header_show';
+            }else{
+                document.querySelector('header').className = 'header';
+            }
+            if(parseInt(window.scrollY) >= window.innerHeight){
+                document.querySelector('.main_in_img').className = 'main_in_img main_in_img_hide';
+            }else{
+                document.querySelector('.main_in_img').className = 'main_in_img';
+            }
+        });
+
+        // 获取当前年月日时分秒
+        function get_date_time(){
+            let date_data = new Date();
+            let res_temp = {
+                year:date_data.getFullYear(),
+                month:(date_data.getMonth()+1),
+                day:date_data.getDate(),
+                week:date_data.getDay(),
+                hour:date_data.getHours(),
+                minute:date_data.getMinutes(),
+                second:date_data.getSeconds()
+            };
+            return res_temp;
+        }
+        
+        // 更新页面时间显示
+        function set_timer(){
+            let date_temp = get_date_time();
+            document.querySelector('.main_timer_y').innerHTML = date_temp.year;
+            document.querySelector('.main_timer_m').innerHTML = date_temp.month;
+            document.querySelector('.main_timer_d').innerHTML = date_temp.day;
+            let week_temp = ['日','一','二','三','四','五','六'];
+            document.querySelector('.main_timer_w').innerHTML = week_temp[date_temp.week];
+            let time_temp = (date_temp.hour/10)>=1?date_temp.hour:('0'+date_temp.hour);
+            time_temp += ':';
+            time_temp += (date_temp.minute/10)>=1?date_temp.minute:('0'+date_temp.minute);
+            time_temp += ':';
+            time_temp += (date_temp.second/10)>=1?date_temp.second:('0'+date_temp.second);
+            document.querySelector('.timer_time').innerHTML = time_temp;
+        }
+        let time_timer = setInterval(function(){
+            set_timer();
+        },500);
+
+        // 音效
+        function audio_01(){
+            let audio_01 = document.querySelector('.audio_01');
+            audio_01.play();
+        }
+        function audio_02(){
+            let audio_02 = document.querySelector('.audio_02');
+            audio_02.play();
+        }
+
+        let cc_1 = document.querySelector('.city_content');
+        let cc_2 = document.querySelector('.area_content');
+        let cc_3 = document.querySelector('.address_content');
+        let cc_4 = document.querySelector('.person_content');
+        let cct_1 = document.querySelector('.city_content .center_content_text');
+        let cct_2 = document.querySelector('.area_content .center_content_text');
+        let cct_3 = document.querySelector('.address_content .center_content_text');
+        let cct_4 = document.querySelector('.person_content .center_content_text');
+        document.querySelector('.city_content_svg').addEventListener('click',function(){
+            cc_1.className = 'center_contents city_content center_contents_open';
+            cc_2.className = 'center_contents area_content center_contents_hide';
+            cc_3.className = 'center_contents address_content center_contents_hide';
+            cc_4.className = 'center_contents person_content center_contents_hide';
+            cct_1.className = 'center_content_text center_content_text_show';
+            document.querySelectorAll('.center_content_cancel_btn')[0].className = 'center_content_cancel_btn center_content_cancel_btn_show';
+            audio_02();
+        });
+        document.querySelector('.area_content_svg').addEventListener('click',function(){
+            cc_1.className = 'center_contents city_content center_contents_hide';
+            cc_2.className = 'center_contents area_content center_contents_open';
+            cc_3.className = 'center_contents address_content center_contents_hide';
+            cc_4.className = 'center_contents person_content center_contents_hide';
+            cct_2.className = 'center_content_text center_content_text_show';
+            document.querySelectorAll('.center_content_cancel_btn')[1].className = 'center_content_cancel_btn center_content_cancel_btn_show';
+            audio_02();
+        });
+        document.querySelector('.address_content_svg').addEventListener('click',function(){
+            cc_1.className = 'center_contents city_content center_contents_hide';
+            cc_2.className = 'center_contents area_content center_contents_hide';
+            cc_3.className = 'center_contents address_content center_contents_open';
+            cc_4.className = 'center_contents person_content center_contents_hide';
+            cct_3.className = 'center_content_text center_content_text_show';
+            document.querySelectorAll('.center_content_cancel_btn')[2].className = 'center_content_cancel_btn center_content_cancel_btn_show';
+            audio_02();
+        });
+        document.querySelector('.person_content_svg').addEventListener('click',function(){
+            cc_1.className = 'center_contents city_content center_contents_hide';
+            cc_2.className = 'center_contents area_content center_contents_hide';
+            cc_3.className = 'center_contents address_content center_contents_hide';
+            cc_4.className = 'center_contents person_content center_contents_open';
+            cct_4.className = 'center_content_text center_content_text_show';
+            document.querySelectorAll('.center_content_cancel_btn')[3].className = 'center_content_cancel_btn center_content_cancel_btn_show';
+            audio_02();
+        });
+        for (let i = 0; i < document.querySelectorAll('.center_content_cancel_btn').length; i++) {
+            document.querySelectorAll('.center_content_cancel_btn')[i].addEventListener('click',function(){
+                cc_1.className = 'center_contents city_content';
+                cc_2.className = 'center_contents area_content';
+                cc_3.className = 'center_contents address_content';
+                cc_4.className = 'center_contents person_content';
+                cct_1.className = 'center_content_text';
+                cct_2.className = 'center_content_text';
+                cct_3.className = 'center_content_text';
+                cct_4.className = 'center_content_text';
+                for (let j = 0; j < document.querySelectorAll('.center_content_cancel_btn').length; j++) {
+                    document.querySelectorAll('.center_content_cancel_btn')[j].className = 'center_content_cancel_btn';
+                }
+                audio_01();
+            });
+        }
+        /*
+        cc_1.addEventListener('mouseenter',function(){
+            cc_1.className = 'center_contents city_content center_contents_open';
+            cc_2.className = 'center_contents area_content center_contents_hide';
+            cc_3.className = 'center_contents address_content center_contents_hide';
+            cc_4.className = 'center_contents person_content center_contents_hide';
+            cct_1.className = 'center_content_text center_content_text_show';
+        });
+        cc_2.addEventListener('mouseenter',function(){
+            cc_1.className = 'center_contents city_content center_contents_hide';
+            cc_2.className = 'center_contents area_content center_contents_open';
+            cc_3.className = 'center_contents address_content center_contents_hide';
+            cc_4.className = 'center_contents person_content center_contents_hide';
+            cct_2.className = 'center_content_text center_content_text_show';
+        });
+        cc_3.addEventListener('mouseenter',function(){
+            cc_1.className = 'center_contents city_content center_contents_hide';
+            cc_2.className = 'center_contents area_content center_contents_hide';
+            cc_3.className = 'center_contents address_content center_contents_open';
+            cc_4.className = 'center_contents person_content center_contents_hide';
+            cct_3.className = 'center_content_text center_content_text_show';
+        });
+        cc_4.addEventListener('mouseenter',function(){
+            cc_1.className = 'center_contents city_content center_contents_hide';
+            cc_2.className = 'center_contents area_content center_contents_hide';
+            cc_3.className = 'center_contents address_content center_contents_hide';
+            cc_4.className = 'center_contents person_content center_contents_open';
+            cct_4.className = 'center_content_text center_content_text_show';
+        });
+        cc_1.addEventListener('mouseleave',function(){
+            cc_1.className = 'center_contents city_content';
+            cc_2.className = 'center_contents area_content';
+            cc_3.className = 'center_contents address_content';
+            cc_4.className = 'center_contents person_content';
+            cct_1.className = 'center_content_text';
+        });
+        cc_2.addEventListener('mouseleave',function(){
+            cc_1.className = 'center_contents city_content';
+            cc_2.className = 'center_contents area_content';
+            cc_3.className = 'center_contents address_content';
+            cc_4.className = 'center_contents person_content';
+            cct_2.className = 'center_content_text';
+        });
+        cc_3.addEventListener('mouseleave',function(){
+            cc_1.className = 'center_contents city_content';
+            cc_2.className = 'center_contents area_content';
+            cc_3.className = 'center_contents address_content';
+            cc_4.className = 'center_contents person_content';
+            cct_3.className = 'center_content_text';
+        });
+        cc_4.addEventListener('mouseleave',function(){
+            cc_1.className = 'center_contents city_content';
+            cc_2.className = 'center_contents area_content';
+            cc_3.className = 'center_contents address_content';
+            cc_4.className = 'center_contents person_content';
+            cct_4.className = 'center_content_text';
+        });
+        */
+       document.querySelector('.copyright_year').innerHTML = new Date().getFullYear();
+    </script>
+</html>
